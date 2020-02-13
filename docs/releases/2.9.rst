@@ -1,0 +1,36 @@
+==========================================
+Wagtail 2.9 release notes - IN DEVELOPMENT
+==========================================
+
+.. contents::
+    :local:
+    :depth: 1
+
+
+What's new
+==========
+
+
+Other features
+~~~~~~~~~~~~~~
+
+ * Added :ref:`streamfield_multiplechoiceblock` block type for StreamField (James O'Toole)
+ * ChoiceBlock now accepts a ``widget`` keyword argument (James O'Toole)
+ * Reduced contrast of rich text toolbar (Jack Paine)
+ * Support the rel attribute on custom ModelAdmin buttons (Andy Chosak)
+ * Server-side page slug generation now respects ``WAGTAIL_ALLOW_UNICODE_SLUGS`` (Arkadiusz Michał Ryś)
+
+
+Bug fixes
+~~~~~~~~~
+
+ * Added ARIA alert role to live search forms in the admin (Casper Timmers)
+ * Reordered login form elements to match expected tab order (Kjartan Sverrisson)
+ * Re-added 'Close Explorer' button on mobile viewports (Sævar Öfjörð Magnússon)
+ * Added a more descriptive label to Password reset link for screen reader users (Casper Timmers, Martin Coote)
+ * Improved Wagtail logo contrast by adding a background (Brian Edelman, Simon Evans, Ben Enright)
+ * Prevent duplicate notification messages on page locking (Jacob Topp-Mugglestone)
+
+Upgrade considerations
+======================
+

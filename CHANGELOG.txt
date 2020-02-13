@@ -1,7 +1,23 @@
 Changelog
 =========
 
-2.8 (xx.xx.xxxx) - IN DEVELOPMENT
+2.9 (xx.xx.xxxx) - IN DEVELOPMENT
+~~~~~~~~~~~~~~~~
+
+ * Added `MultipleChoiceBlock` block type for StreamField (James O'Toole)
+ * ChoiceBlock now accepts a `widget` keyword argument (James O'Toole)
+ * Reduced contrast of rich text toolbar (Jack Paine)
+ * Support the rel attribute on custom ModelAdmin buttons (Andy Chosak)
+ * Server-side page slug generation now respects `WAGTAIL_ALLOW_UNICODE_SLUGS` (Arkadiusz Michał Ryś)
+ * Fix: Added ARIA alert role to live search forms in the admin (Casper Timmers)
+ * Fix: Reorder login form elements to match expected tab order (Kjartan Sverrisson)
+ * Fix: Re-add 'Close Explorer' button on mobile viewports (Sævar Öfjörð Magnússon)
+ * Fix: Add a more descriptive label to Password reset link for screen reader users (Casper Timmers, Martin Coote)
+ * Fix: Improve Wagtail logo contrast by adding a background (Brian Edelman, Simon Evans, Ben Enright)
+ * Fix: Prevent duplicate notification messages on page locking (Jacob Topp-Mugglestone)
+
+
+2.8 (03.02.2020)
 ~~~~~~~~~~~~~~~~
 
  * Django 3.0 support (Matt Westcott, Mads Jensen)
@@ -9,31 +25,31 @@ Changelog
  * Removed support for Django 2.0
  * Removed leftover Python 2.x compatibility code (Sergey Fedoseev)
  * Combine flake8 configurations (Sergey Fedoseev)
- * Improved diffing behavior for text fields (Aliosha Padovani)
+ * Improve diffing behavior for text fields (Aliosha Padovani)
  * Improve contrast of disabled inputs (Nick Smith)
  * Added `get_document_model_string` function (Andrey Smirnov)
  * Added support for Cloudflare API tokens for frontend cache invalidation (Tom Usher)
  * Cloudflare frontend cache invalidation requests are now sent in chunks of 30 to fit within API limits (Tom Usher)
- * Added `ancestors` field to pages endpoint in admin API (Karl Hobley)
+ * Added `ancestors` field to the pages endpoint in admin API (Karl Hobley)
  * Removed Django admin management of `Page` & `Site` models (Andreas Bernacca)
  * Cleaned up Django docs URLs in documentation (Pete Andrew)
  * Add StreamFieldPanel to available panel types in documentation (Dan Swain)
- * Add {{ block.super }} example to ModelAdmin customisation in documentation (Dan Swain)
+ * Add `{{ block.super }}` example to ModelAdmin customisation in documentation (Dan Swain)
  * Add ability to filter image index by a tag (Benedikt Willi)
  * Add partial experimental support for nested InlinePanels (Matt Westcott, Sam Costigan, Andy Chosak, Scott Cranfill)
  * Added cache control headers when serving documents (Johannes Vogel)
  * Use `sensitive_post_parameters` on password reset form (Dan Braghis)
- * Add ``WAGTAIL_ENABLE_RESPONSIVE_EMBED`` setting to remove automatic addition of ``responsive-object`` around embeds (Kalob Taulien)
+ * Add `WAGTAILEMBEDS_RESPONSIVE_HTML` setting to remove automatic addition of `responsive-object` around embeds (Kalob Taulien)
  * Fix: Rename documents listing column 'uploaded' to 'created' (LB (Ben Johnston))
  * Fix: Unbundle the l18n library as it was bundled to avoid installation errors which have been resolved (Matt Westcott)
  * Fix: Prevent error when comparing pages that reference a model with a custom primary key (Fidel Ramos)
  * Fix: Moved `get_document_model` location so it can be imported when Models are not yet loaded (Andrey Smirnov)
- * Fix: Fixed incorrect HTML escaping of Jinja2 form templates for StructBlocks (Brady Moe)
+ * Fix: Use correct HTML escaping of Jinja2 form templates for StructBlocks (Brady Moe)
  * Fix: All templates with wagtailsettings and modeladmin now use `block.super` for `extra_js` & `extra_css` (Timothy Bautista)
- * Fix: Layout issue when using FieldRowPanel with a heading (Andreas Bernacca)
- * Fix: `file_size` and `file_hash` not updated when Document file changed (Andreas Bernacca)
+ * Fix: Layout issue when using `FieldRowPanel` with a heading (Andreas Bernacca)
+ * Fix: `file_size` and `file_hash` now updated when Document file changed (Andreas Bernacca)
  * Fix: Fixed order of URLs in project template so that static / media URLs are not blocked (Nick Smith)
- * Fix: Added verbose_name_plural for form submission model (Janneke Janssen)
+ * Fix: Added `verbose_name_plural` to form submission model (Janneke Janssen)
  * Fix: Prevent `update_index` failures and incorrect front-end rendering on blank `TableBlock` (Carlo Ascani)
  * Fix: Dropdown initialisation on the search page after AJAX call (Eric Sherman)
  * Fix: Make sure all modal chooser search results correspond to the latest search by canceling previous requests (Esper Kuijs)

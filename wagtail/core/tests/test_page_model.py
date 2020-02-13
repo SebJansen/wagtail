@@ -84,6 +84,18 @@ class TestValidation(TestCase):
         homepage.add_child(instance=christmas_page)
         self.assertTrue(Page.objects.filter(id=christmas_page.id).exists())
 
+    @override_settings(WAGTAIL_ALLOW_UNICODE_SLUGS=True)
+    def test_slug_generation_respects_unicode_setting_true(self):
+        page = Page(title="A mööse bit me önce")
+        Page.get_first_root_node().add_child(instance=page)
+        self.assertEqual(page.slug, 'a-mööse-bit-me-önce')
+
+    @override_settings(WAGTAIL_ALLOW_UNICODE_SLUGS=False)
+    def test_slug_generation_respects_unicode_setting_false(self):
+        page = Page(title="A mööse bit me önce")
+        Page.get_first_root_node().add_child(instance=page)
+        self.assertEqual(page.slug, 'a-moose-bit-me-once')
+
     def test_get_admin_display_title(self):
         homepage = Page.objects.get(url_path='/home/')
         self.assertEqual(homepage.draft_title, homepage.get_admin_display_title())
@@ -1571,12 +1583,12 @@ class TestMakePreviewRequest(TestCase):
         request = response.context_data['request']
 
         # in the absence of an actual Site record where we can access this page,
-        # dummy_request should still provide a hostname that Django's host header
+        # make_preview_request should still provide a hostname that Django's host header
         # validation won't reject
         self.assertEqual(request.META['HTTP_HOST'], 'production.example.com')
 
     @override_settings(ALLOWED_HOSTS=['*'])
-    def test_dummy_request_for_inaccessible_page_with_wildcard_allowed_hosts(self):
+    def test_make_preview_request_for_inaccessible_page_with_wildcard_allowed_hosts(self):
         root_page = Page.objects.get(url_path='/')
         response = root_page.make_preview_request()
         self.assertEqual(response.status_code, 200)

@@ -75,6 +75,17 @@ Wagtail has a builtin list of the most common providers.
 The embeds fetching can be fully configured using the ``WAGTAILEMBEDS_FINDERS``
 setting. This is fully documented in :ref:`configuring_embed_finders`.
 
+.. code-block:: python
+
+    WAGTAILEMBEDS_RESPONSIVE_HTML = True
+
+Adds ``class="responsive-object"`` and an inline ``padding-bottom`` style to embeds,
+to assist in making them responsive. See :ref:`responsive-embeds` for details.
+
+.. versionadded:: 2.8
+
+  The ``WAGTAILEMBEDS_RESPONSIVE_HTML`` setting was added.
+
 Dashboard
 =========
 
@@ -511,6 +522,9 @@ Customise the behaviour of rich text fields. By default, ``RichTextField`` and `
  * ``WIDGET``: The rich text widget implementation to use. Wagtail provides two implementations: ``wagtail.admin.rich_text.DraftailRichTextArea`` (a modern extensible editor which enforces well-structured markup) and ``wagtail.admin.rich_text.HalloRichTextArea`` (deprecated; works directly at the HTML level). Other widgets may be provided by third-party packages.
 
  * ``OPTIONS``: Configuration options to pass to the widget. Recognised options are widget-specific, but both ``DraftailRichTextArea`` and ``HalloRichTextArea`` accept a ``features`` list indicating the active rich text features (see :ref:`rich_text_features`).
+
+
+.. _WAGTAILADMIN_GLOBAL_PAGE_EDIT_LOCK:
 
 Page locking
 ============

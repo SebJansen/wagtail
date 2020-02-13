@@ -3,7 +3,6 @@ import logging
 from collections import defaultdict
 from io import StringIO
 from urllib.parse import urlparse
-from warnings import warn
 
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
@@ -33,7 +32,6 @@ from wagtail.core.sites import get_site_for_hostname
 from wagtail.core.url_routing import RouteResult
 from wagtail.core.utils import WAGTAIL_APPEND_SLASH, camelcase_to_underscore, resolve_model_string
 from wagtail.search import index
-from wagtail.utils.deprecation import RemovedInWagtail29Warning
 
 
 logger = logging.getLogger('wagtail.core')
@@ -433,7 +431,8 @@ class Page(AbstractPage, index.Indexed, ClusterableModel, metaclass=PageBase):
 
         if not self.slug:
             # Try to auto-populate slug from title
-            base_slug = slugify(self.title, allow_unicode=True)
+            allow_unicode = getattr(settings, 'WAGTAIL_ALLOW_UNICODE_SLUGS', True)
+            base_slug = slugify(self.title, allow_unicode=allow_unicode)
 
             # only proceed if we get a non-empty base slug back from slugify
             if base_slug:
@@ -1335,29 +1334,6 @@ class Page(AbstractPage, index.Indexed, ClusterableModel, metaclass=PageBase):
         for the faked HttpRequest.
         """
         return self.full_url
-
-    def dummy_request(self, original_request=None, **meta):
-        warn(
-            "Page.dummy_request is deprecated. Use Page.make_preview_request instead",
-            category=RemovedInWagtail29Warning
-        )
-
-        dummy_values = self._get_dummy_headers(original_request)
-
-        # Add additional custom metadata sent by the caller.
-        dummy_values.update(**meta)
-
-        request = WSGIRequest(dummy_values)
-
-        # Add a flag to let middleware know that this is a dummy request.
-        request.is_dummy = True
-
-        # Apply middleware to the request
-        handler = BaseHandler()
-        handler.load_middleware()
-        handler._middleware_chain(request)
-
-        return request
 
     DEFAULT_PREVIEW_MODES = [('', _('Default'))]
 
